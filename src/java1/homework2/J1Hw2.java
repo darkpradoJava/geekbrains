@@ -26,7 +26,7 @@ public class J1Hw2 {
         //task1.
         int[] arr1 = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0};
         System.out.println(Arrays.toString(arr1));
-        replaceArray(arr1);
+        replaceArrayTask1(arr1);
         System.out.println(Arrays.toString(arr1));
 
         //task2.
@@ -48,12 +48,22 @@ public class J1Hw2 {
         }
 
         //task5.
+        minMax(arr3);
 
+        //task6.
+        //int[] arr6 = {1, 1, 2};
+        System.out.println(isCenter(new int[]{1, 1, 2}));
+
+        //task7.
+        int[] arr7 = {1, 2, 3, 4, 5};
+        System.out.println(Arrays.toString(arr7));
+        replaceArray(arr7, 2);
+        System.out.println(Arrays.toString(arr7));
 
     }
 
     //task1.
-    public static void replaceArray(int[] arr) {
+    public static void replaceArrayTask1(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = arr[i] == 0 ? 1 : 0;
         }
@@ -84,5 +94,54 @@ public class J1Hw2 {
     }
 
     //task5.
+    public static void minMax(int[] arr) {
+        int min = arr[0], max = arr[0];
+        for (int n : arr) {
+            if (n < min) min = n;
+            if (n > max) max = n;
+        }
+        System.out.println("В массиве:");
+        System.out.println(Arrays.toString(arr));
+        System.out.println("минимум = " + min + ", максимум = " + max);
+    }
 
+    //task6.
+    public static boolean isCenter(int[] arr) {
+        int center = 0, result = 0;
+        for (int n : arr) {
+            center += n;
+        }
+        center /= 2;
+        for (int n : arr) {
+            result += n;
+            if (result > center) return false;
+            if (result == center) return true;
+        }
+        return false;
+    }
+
+    //task7.
+    public static void replaceArray(int[] arr, int n) {
+        n = n % arr.length;
+        if (n == 0) return;
+        if (n > 0) {
+            for (int i = 0; i < n; i++) {
+                int temp = arr[arr.length - 1];
+                for (int j = arr.length - 2; j >= 0; j--) {
+                    arr[j + 1] = arr[j];
+                }
+                arr[0] = temp;
+            }
+        }
+        if (n < 0) {
+            n *= -1;
+            for (int i = 0; i < n; i++) {
+                int temp = arr[0];
+                for (int j = 1; j < arr.length; j++) {
+                    arr[j - 1] = arr[j];
+                }
+                arr[arr.length - 1] = temp;
+            }
+        }
+    }
 }
