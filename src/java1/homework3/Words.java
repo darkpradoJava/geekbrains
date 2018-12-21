@@ -68,7 +68,7 @@ public class Words {
 
     void setWordAi() {
         wordAi = words[rand.nextInt(words.length - 1)];
-        System.out.println(wordAi);
+        //System.out.println(wordAi);
         System.out.println("Компьютер загадал слово(животное)");
     }
 
