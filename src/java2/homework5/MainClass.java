@@ -89,21 +89,31 @@ public class MainClass {
         System.arraycopy(arr, 0, arr1, 0, HALF_SIZE);
         System.arraycopy(arr, HALF_SIZE, arr2, 0, HALF_SIZE);
 
-        new Thread() {
+        Thread one = new Thread() {
             @Override
             public void run() {
                 float[] mas1 = calculation(arr1);
                 System.arraycopy(mas1, 0, arr1, 0, mas1.length);
             }
-        }.start();
+        };
 
-        new Thread() {
+        Thread two = new Thread() {
             @Override
             public void run() {
                 float[] mas2 = calculation(arr2);
                 System.arraycopy(mas2, 0, arr2, 0, mas2.length);
             }
-        }.start();
+        };
+
+        one.start();
+        two.start();
+
+        try {
+            one.join();
+            two.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         System.arraycopy(arr1, 0, arr, 0, HALF_SIZE);
         System.arraycopy(arr2, 0, arr, HALF_SIZE, HALF_SIZE);
