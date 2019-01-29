@@ -27,7 +27,7 @@ public class Client {
     public Client() {
         initClient();
         sendMsgs();
-        //getMsgs();
+        getMsgs();
         closeClient();
     }
 
@@ -84,9 +84,6 @@ public class Client {
                 try {
                     while (true) {
                         msg = reader.readLine();
-                        if (msg.equalsIgnoreCase("close chat")) {
-                            break;
-                        }
                         out.write(msg + "\n");
                         out.flush();
                     }
@@ -96,9 +93,7 @@ public class Client {
         });
         try {
             sends.start();
-            sends.join();
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
         }
     }
-
 }

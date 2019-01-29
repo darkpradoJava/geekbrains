@@ -27,8 +27,8 @@ public class Server {
 
     public Server() {
         initServer();
+        sendMsgs();
         getMsgs();
-        //sendMsgs();
         closeServer();
     }
 
@@ -88,9 +88,6 @@ public class Server {
                 try {
                     while (true) {
                         msg = reader.readLine();
-                        if (msg.equalsIgnoreCase("close chat")) {
-                            break;
-                        }
                         out.write(msg + "\n");
                         out.flush();
                     }
@@ -100,8 +97,7 @@ public class Server {
         });
         try {
             sends.start();
-            sends.join();
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
         }
     }
 
