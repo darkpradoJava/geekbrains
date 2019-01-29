@@ -50,6 +50,7 @@ public class Client {
             out.close();
             socket.close();
             System.out.println("Клиент закрыт.");
+            System.exit(0);
         } catch (Exception e) {
         }
     }
@@ -86,6 +87,9 @@ public class Client {
                         msg = reader.readLine();
                         out.write(msg + "\n");
                         out.flush();
+                        if (msg.equalsIgnoreCase("close chat")) {
+                            break;
+                        }
                     }
                 } catch (Exception e) {
                 }

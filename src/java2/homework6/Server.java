@@ -54,6 +54,7 @@ public class Server {
             socket.close();
             server.close();
             System.out.println("Сервер закрыт.");
+            System.exit(0);
         } catch (Exception e) {
         }
     }
@@ -90,6 +91,9 @@ public class Server {
                         msg = reader.readLine();
                         out.write(msg + "\n");
                         out.flush();
+                        if (msg.equalsIgnoreCase("close chat")) {
+                            break;
+                        }
                     }
                 } catch (Exception e) {
                 }
