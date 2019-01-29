@@ -28,6 +28,7 @@ public class Server {
     public Server() {
         initServer();
         getMsgs();
+        //sendMsgs();
         closeServer();
     }
 
@@ -76,6 +77,30 @@ public class Server {
         try {
             gets.start();
             gets.join();
+        } catch (InterruptedException e) {
+        }
+    }
+
+    public void sendMsgs() {
+        Thread sends = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        msg = reader.readLine();
+                        if (msg.equalsIgnoreCase("close chat")) {
+                            break;
+                        }
+                        out.write(msg + "\n");
+                        out.flush();
+                    }
+                } catch (Exception e) {
+                }
+            }
+        });
+        try {
+            sends.start();
+            sends.join();
         } catch (InterruptedException e) {
         }
     }

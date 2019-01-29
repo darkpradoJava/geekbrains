@@ -27,6 +27,7 @@ public class Client {
     public Client() {
         initClient();
         sendMsgs();
+        //getMsgs();
         closeClient();
     }
 
@@ -53,6 +54,29 @@ public class Client {
         }
     }
 
+    public void getMsgs() {
+        Thread gets = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        msg = in.readLine();
+                        if (msg.equalsIgnoreCase("close chat")) {
+                            break;
+                        }
+                        System.out.println(msg);
+                    }
+                } catch (Exception e) {
+                }
+            }
+        });
+        try {
+            gets.start();
+            gets.join();
+        } catch (InterruptedException e) {
+        }
+    }
+
     public void sendMsgs() {
         Thread sends = new Thread(new Runnable() {
             @Override
@@ -63,7 +87,7 @@ public class Client {
                         if (msg.equalsIgnoreCase("close chat")) {
                             break;
                         }
-                        out.write(msg);
+                        out.write(msg + "\n");
                         out.flush();
                     }
                 } catch (Exception e) {
