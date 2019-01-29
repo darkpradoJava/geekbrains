@@ -85,6 +85,9 @@ public class Client {
                 try {
                     while (true) {
                         msg = reader.readLine();
+                        if(msg.equals("")) {
+                            continue;
+                        }
                         out.write(msg + "\n");
                         out.flush();
                         if (msg.equalsIgnoreCase("close chat")) {
