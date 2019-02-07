@@ -4,6 +4,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * @author Stanislav Melekhin
@@ -19,6 +20,7 @@ public class Server {
     private Socket socket = null;
     private ClientHandler newClient = null;
     private List<ClientHandler> clients = new ArrayList<>();
+    private Scanner inMessage;
 
     public Server() {
 
@@ -27,7 +29,8 @@ public class Server {
             System.out.println("Сервер запущен...");
             while (true) {
                 socket = server.accept();
-                newClient = new ClientHandler(socket, this);
+                System.out.println("Введите свой ник");
+                newClient = new ClientHandler(socket, this, inMessage.next());
                 clients.add(newClient);
                 new Thread(newClient).start();
             }

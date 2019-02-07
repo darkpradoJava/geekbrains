@@ -7,5 +7,7 @@ package java2.chat.server;
  */
 
 public class LauncherServer {
-    Server server = new Server();
+    public static void main(String[] args) {
+        Server server = new Server();
+    }
 }

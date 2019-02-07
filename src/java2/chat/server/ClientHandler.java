@@ -24,12 +24,14 @@ public class ClientHandler implements Runnable {
     private Scanner inMessage;
     private Socket socket;
     private Server server;
+    private String nick;
 
-    public ClientHandler(Socket socket, Server server) {
+    public ClientHandler(Socket socket, Server server, String nick) {
 
         clientsCount++;
         this.socket = socket;
         this.server = server;
+        this.nick = nick;
         try {
             this.outMessage = new PrintWriter(socket.getOutputStream());
             this.inMessage = new Scanner(socket.getInputStream());
