@@ -20,7 +20,9 @@ public class Box<T extends Fruit> {
     public float getWeight() {
         float w = 0;
         try {
-            w = fruitsList.size() * fruitsList.get(0).getWeight();
+            if (!fruitsList.isEmpty()) {
+                w = fruitsList.size() * fruitsList.get(0).getWeight();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
